@@ -43,7 +43,7 @@ export const useAuthentication = () => {
       await updateProfile(user, {
           displayName: data.displayName
       });
-
+      console.log(user)
       setLoading(false)
   
       return user;

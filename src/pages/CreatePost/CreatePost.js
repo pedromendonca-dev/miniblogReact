@@ -16,6 +16,8 @@ const CreatePost = () => {
 
   const navigate = useNavigate()
 
+  console.log(user)
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormError("");
@@ -43,12 +45,14 @@ const CreatePost = () => {
       body,
       tagsArray,
       uid: user.uid,
-      createdBy: user.displayName,
+      createdBy: user.displayName
     });
 
 
     navigate('/')
+    if(!response.error){
     console.log(insertDocument)
+  }
   };
   return (
     <div className={styles.create_post}>
