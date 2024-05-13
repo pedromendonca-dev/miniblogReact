@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { useAuthentication } from './hooks/useAuthentication';
 import { useState, useEffect } from 'react';
@@ -15,8 +15,10 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import { onAuthStateChanged } from 'firebase/auth';
 import Search from './pages/Search/Search';
 import Post from './pages/Post/Post';
+import EditPost from './pages/EditPost/EditPost';
 
 function App() {
+  
   const [user,setUser] = useState(undefined)
   const {auth} = useAuthentication()
   const loading = user === undefined
@@ -49,6 +51,10 @@ function App() {
               <Route 
               path="/login" 
               element={!user ? <Login />: <Navigate to ='/'/>} />
+
+              <Route 
+              path="/posts/edit/:id" 
+              element={user ? <EditPost/>: <Navigate to ='/login'/>} />
 
               <Route 
               path="/posts/create" 
